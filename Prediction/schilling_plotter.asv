@@ -26,18 +26,17 @@ found_top=0;
 ignore =1;
 done = false;
 final = [];
+w=1;
 while true
     store = {};
     store{3} = [];
     store{4} = [];
     
-    w = waitforbuttonpress;
+    %w = waitforbuttonpress;
     if w == 1
         clf
         i = i+1;
-        if i > length(dat)
-            break;
-        end
+        if i>
         data(i) = dat(i);
         time(i) = t(i);
         %data(i,2) = dat(i,2);
@@ -138,5 +137,4 @@ while true
         disp(w)
     end
 end
-xlswrite(filename,final)
 disp('done!')
