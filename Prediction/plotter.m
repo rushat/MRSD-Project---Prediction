@@ -2,12 +2,12 @@ clc;
 clear all;
 Fs = 10;
 
-fileID = fopen('capture_0_3.txt','r');
-formatSpec = '%f';
-sizeA = [1 Inf];
-Data = fscanf(fileID,formatSpec,sizeA);
-dat = Data.';
-dat = dat(2:size(dat, 1) - 2, :);
+% fileID = fopen('capture_0_3.txt','r');
+% formatSpec = '%f';
+% sizeA = [1 Inf];
+% Data = fscanf(fileID,formatSpec,sizeA);
+% dat = Data.';
+% dat = dat(2:size(dat, 1) - 2, :);
 
 xlSheet = 'TMSMotion1.xlsx';
 range = 'B2:B4065';
@@ -25,11 +25,11 @@ dat = dat - mean(dat);
 % end
 % dat = dat(end_:end-10,1);
 
-from = 375;
-to = 381;
-datmod = dat((from+1):(to+1));
-tnew = (from:from+(size(datmod,1)-1)).';
-tnew = tnew*1/Fs;
+% from = 934;
+% to = 954;
+% datmod = dat((from+1):(to+1))
+% tnew = (from:from+(size(datmod,1)-1)).';
+% tnew = tnew*1/Fs
 
 t = (0:size(dat,1)-1).';
 t = t*1/Fs;
