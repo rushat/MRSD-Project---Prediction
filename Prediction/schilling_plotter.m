@@ -1,5 +1,27 @@
+%   Code written by Rushat Gupta Chadha
+%   For more information contact - rushatgc@gmail.com
+%   
+%   Plotter for "real-time" like streaming of TMS data for prediction of
+%   motion and optimal docking point
+% 
+%   After running the program hit enter on the plot figure to simulate
+%   streaming of data
+%   -If the program is slow, please turn off legend
+%   -Warning: do not hold enter for a long time as MATLAB buffers the
+%   keyboard inputs
+%   
+%   https://github.com/rushat/MRSD-Project---Prediction
+%   
+%   Version History - 
+%   v1.0 - plotter with stream
+%   v1.1 - added storage of data for GOOD and BAD prediction labels
+%   Future work - add online prediction of GOOD and BAD labels
+%   
+%   
+
+%% Code starts here 
 clc
-clear
+clear all
 
 %% read file
 filename = 'testdata.xlsx';
@@ -122,13 +144,14 @@ while true
             store{2} = (y_plot(length(y_plot))-y_plot(length(y_plot)-1))*Fs;% Stores predicted velocity
             hold on
             plot(tnew',datmod','y')
+%             legend('Realtime data stream','predicted curve','collected data');
             store{5} = store{1} - store{3};                                 % Stores error in time 
             store{6} = store{2} - store{4};                                 % Stored error in velocity
             disp('Predicted time,predicted velocity,actual time,actual velocity,error in time, error in velocity, No. data pt')
             disp(store);
             if ~isempty(store{5}) && done == false                          % stores data to determine confidence metric. Manual observation for now. Could be made online
                 %xlswrite(filename,store)
-                final = vertcat(final,store)                                % stores the prediction and error for each curve
+                final = vertcat(final,store);                                % stores the prediction and error for each curve
                 disp('store');
                 done = true;
             elseif isempty(store{5})
@@ -136,12 +159,11 @@ while true
             end
             end
         end
-        
-   
     else
         disp('Press Button')
         disp(w)
     end
+    
 end
 xlswrite(filename,final)
 disp('done!')
